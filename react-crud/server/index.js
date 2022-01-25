@@ -39,8 +39,18 @@ app.delete('/customer/:id',(req,res) => {
             console.log("1 record inserted, ID: " + result.insertId);
         res.send(result)
         });
-        
-    
+});
+
+app.put('/update',(req,res) => {
+    const id = req.body.id;
+    const first_name = req.body.first_name;
+    db.query("UPDATE customer SET first_name = ? WHERE id = ?", [first_name,id], (err,result) => {
+        if (err) {
+            console.log(err);
+        }else {
+            res.send(result);
+        }
+    })
 })
 
 app.listen('3001',() => {
